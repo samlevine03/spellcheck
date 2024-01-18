@@ -20,7 +20,8 @@ SpellCheck is a Python project designed as a learning exercise to implement the 
 ```
 $ python3 main.py
 Enter a word: spellign
-Did you mean: spelling
+Did you mean:
+spelling
 ```
 
 ## Contributing
