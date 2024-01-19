@@ -6,7 +6,7 @@ class Dictionary:
     def __init__(self):
         self.ordered_dict = self._build_dict()
         self.dict = set(self.ordered_dict)
-        self.word_freq = {word: i for i, word in enumerate(self.ordered_dict)}
+        self.word_rank = {word: i for i, word in enumerate(self.ordered_dict)}
 
     def _build_dict(self, size=DICT_SIZE) -> list:
         with open('words.txt', 'r') as f:
@@ -25,11 +25,11 @@ class Dictionary:
     def is_word(self, word: str) -> bool:
         return word.lower() in self.dict
     
-    def word_frequency(self, word: str) -> int:
+    def get_word_rank(self, word: str) -> int:
         """
         Returns the index of the word in the dictionary.
         """
-        return self.word_freq.get(word, -1)
+        return self.word_rank.get(word, -1)
 
     def wagner_fischer(self, w1: str, w2: str) -> int:
         """
@@ -71,5 +71,5 @@ class Dictionary:
                 continue
     
         suggestions = list(filter(lambda x: x[1] == min_dist, suggestions))[:3]
-        suggestions = list(filter(lambda x: self.word_frequency(x[0]) - self.word_frequency(suggestions[0][0]) < k, suggestions))
+        suggestions = list(filter(lambda x: self.get_word_rank(x[0]) - self.get_word_rank(suggestions[0][0]) < k, suggestions))
         return suggestions
